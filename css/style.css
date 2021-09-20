@@ -89,8 +89,10 @@ nav {
   gap: 2rem;
 
   /* NOTE This creates the fade in/out anumation */
-  opacity: 0;
+  /* opacity: 0; */
+  display: grid;
   transition: all 1s;
+  padding-bottom: 50px;
 }
 
 .balance {

@@ -34,6 +34,7 @@ const account4 = {
 };
 
 const accounts = [account1, account2, account3, account4];
+console.log(accounts);
 
 // Elements
 const labelWelcome = document.querySelector('.welcome');
@@ -70,6 +71,73 @@ const currencies = new Map([
   ['EUR', 'Euro'],
   ['GBP', 'Pound sterling'],
 ]);
-console.log(currencies);const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+const displayMovements = function (movement) {
+  containerMovements.innerHTML = '';
+  movement.forEach((mov, index) => {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+    const html = `
+      <div class="movements__row">
+          <div class="movements__type movements__type--${type}">${
+      index + 1
+    } ${type}</div>
+          <div class="movements__value">${mov}€</div>
+      </div>
+`;
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+
+displayMovements(account1.movements);
+
+const calcDisplayBalance = function (movement) {
+  const balance = movement.reduce((acc, cur) => acc + cur, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+
+calcDisplayBalance(account1.movements);
+
+const calcDisplaySummary = function (movement) {
+  const income = movement
+    .filter(mov => mov > 0)
+    .reduce((acc, cur) => acc + cur);
+  labelSumIn.textContent = `${income}€`;
+  const outCome = movement
+    .filter(mov => mov < 0)
+    .reduce((acc, cur) => acc + cur);
+  labelSumOut.textContent = `${Math.abs(outCome)}€`;
+
+  const interest = movement
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * 20) / 100)
+    .reduce((acc, cur) => acc + cur,0);
+  labelSumInterest.textContent = `${interest}€`;
+};
+
+calcDisplaySummary(account1.movements);
+
+const createUserNames = function (accs) {
+  accs.forEach(acc => {
+    acc.userName = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => {
+        return name[0];
+      })
+      .join('');
+
+    console.log(acc.userName);
+  });
+};
+createUserNames(accounts);
+
+
+const account = accounts.find((acc)=>{
+  if( acc.owner == 'Sarah Smith'){
+    return acc.owner
+  }
+})
+console.log(account);
