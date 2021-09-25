@@ -92,7 +92,9 @@ nav {
   /* opacity: 0; */
   display: grid;
   transition: all 1s;
+  opacity: 0;
   padding-bottom: 50px;
+  display: none;
 }
 
 .balance {
