@@ -93,7 +93,7 @@ nav {
   display: grid;
   transition: all 1s;
   opacity: 0;
-  display: none;
+
   padding-bottom: 50px;
 }
 
